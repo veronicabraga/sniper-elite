@@ -1,13 +1,15 @@
 package org.academiadecodigo.bootcamp;
 
-public abstract class Enemy extends GameObject{
+public abstract class Enemy extends GameObject implements Shootable{
 
     private int health;
     private boolean isDead;
+    private boolean isDestroyed;
 
     public Enemy() {
         health = 60;
         isDead = false;
+        isDestroyed = false;
     }
 
     public int getHealth() {
@@ -26,7 +28,16 @@ public abstract class Enemy extends GameObject{
         this.isDead = isDead;
     }
 
-    public abstract void hit(int bulletDamage);
+
+    public boolean isDestroyed() {
+        return isDestroyed;
+    }
+
+    public void setIsDestroyed(boolean destroyed) {
+        isDestroyed = destroyed;
+    }
+
+    //public abstract void hit(int bulletDamage);
 
     public String getMessage() {
         return "X";

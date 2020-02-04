@@ -28,8 +28,9 @@ public class Game {
     public GameObject getRandomObject() {
 
         double probArmoured = 0.7;
-        double probSoldier = 0.5;
-        //double probTree = 0.3;
+        double probSoldier = 0.4;
+        double probBarrel = 0.2;
+        //double probTree = 0.1;
 
         double result = Math.random();
 
@@ -38,6 +39,9 @@ public class Game {
 
         } else if (result < probArmoured && result >= probSoldier) {
             return new SoldierEnemy();
+
+        } else if (result < probSoldier && result >= probBarrel) {
+            return new Barrel();
 
         } else {
             return new Tree();
@@ -49,18 +53,24 @@ public class Game {
 
         for (int i = 0; i < gameObjects.length; i++) {
 
-            if (gameObjects[i] instanceof Enemy) {
+            if (gameObjects[i] instanceof Shootable) {
 
-                Enemy enemy = (Enemy) gameObjects[i];
+                Shootable shootable = (Shootable) gameObjects[i];
 
-                System.out.println("There is a enemy!");
+                System.out.println("There is a shootable!");
 
-                while (enemy.getHealth() > 0) {
+                while (!shootable.isDestroyed()) {
+                    sniperRifle.shoot(shootable);
+                    shotsFired++;
+                }
+
+
+               /* while (enemy.getHealth() > 0) {
                     sniperRifle.shoot(enemy);
                     shotsFired++;
                 }
                 enemy.setIsDead(true);
-                System.out.println("The enemy is dead, the sniper shot " + shotsFired + " shots.");
+                System.out.println("The enemy is dead, the sniper shot " + shotsFired + " shots."); */
 
             } else {
                 //gameObjects[i].getMessage();

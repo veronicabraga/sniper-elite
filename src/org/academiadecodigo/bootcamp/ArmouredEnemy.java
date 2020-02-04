@@ -17,6 +17,10 @@ public class ArmouredEnemy extends Enemy{
         } else {
             setHealth(getHealth() - bulletDamage);
             System.out.println("The Armoured Enemy was shot, he does not have armour points anymore, he has " + getHealth() + " health points now.");
+            if ( getHealth() == 0 ) {
+                setIsDestroyed(true);
+                System.out.println("The Armoured Enemy was destroyed!");
+            }
         }
     }
 
